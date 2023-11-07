@@ -2,59 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.tailwindcss.com" rel="stylesheet">
 </head>
 <body class="h-screen overflow-hidden flex items-center justify-center" style="background: #edf2f7;">
-    <!DOCTYPE html>
-    <html class="border-l" lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-        <style>
-            * {
-                margin: 0;
-                padding: 0;
-            }
-            .instagram-logo {
-                background-position: 0 -130px;
-                height: 51px;
-                width: 175px;
-                background-image: url(https://bit.ly/3v2LT17);
-            }
-            .facebook-logo {
-                background-position: -414px -259px;
-                background-image: url(https://bit.ly/3v2LT17);
-                height: 16px;
-                width: 16px;
-            }
-            .apple-store-logo {
-                background-position: -132px -182px;
-                height: 42px;
-                width: 128px;
-                background-image: url(https://bit.ly/3v2LT17);
-            }
-            .google-store-logo {
-                background-position: 0 -182px;
-                height: 42px;
-                width: 130px;
-                background-image: url(https://bit.ly/3v2LT17);
-            }
-        </style>
-    </head>
-    <body>
     <div class="h-screen bg-gray-50 flex flex-col justify-center items-center">
         <div class="bg-white border border-gray-300 w-80 py-8 flex items-center flex-col mb-3">
             <h1 class="bg-no-repeat instagram-logo"></h1>
-            <form class="mt-8 w-64 flex flex-col">
-                <input autofocus
-                       class="text-xs w-full mb-2 rounded border bg-gray-100 border-gray-300 px-2 py-2 focus:outline-none focus:border-gray-400 active:outline-none"
-                       id="email" placeholder="Phone number, username, or email" type="text">
-                <input autofocus
-                       class="text-xs w-full mb-4 rounded border bg-gray-100 border-gray-300 px-2 py-2 focus:outline-none focus:border-gray-400 active:outline-none"
-                       id="password" placeholder="Password" type="password">
-                <a class=" text-sm text-center bg-blue-300 text-white py-1 rounded font-medium">
+            <form class="mt-8 w-64 flex flex-col" id="loginForm">
+                <input
+                    autofocus
+                    class="text-xs w-full mb-2 rounded border bg-gray-100 border-gray-300 px-2 py-2 focus:outline-none focus:border-gray-400 active:outline-none"
+                    id="email" placeholder="Phone number, username, or email" type="text">
+                <input
+                    class="text-xs w-full mb-4 rounded border bg-gray-100 border-gray-300 px-2 py-2 focus:outline-none focus:border-gray-400 active:outline-none"
+                    id="password" placeholder="Password" type="password">
+                <a class="text-sm text-center bg-blue-300 text-white py-1 rounded font-medium" id="loginButton">
                     Log In
                 </a>
             </form>
@@ -81,10 +45,20 @@
             </div>
         </div>
     </div>
-    </body>
-    </html>
-    </body>
-    </html>
-    <script src="script.js"></script>
+
+    <script>
+        // Add an event listener to the "Log In" button to handle the form submission
+        const loginButton = document.getElementById("loginButton");
+        loginButton.addEventListener("click", function() {
+            // Get the email and password values from the form
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            // You can add your own validation and login logic here
+            // For now, let's just log the values to the console
+            console.log("Email: " + email);
+            console.log("Password: " + password);
+        });
+    </script>
 </body>
 </html>
